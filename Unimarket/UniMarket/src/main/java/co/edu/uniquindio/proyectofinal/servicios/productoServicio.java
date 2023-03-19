@@ -3,7 +3,9 @@ package co.edu.uniquindio.proyectofinal.servicios;
 import co.edu.uniquindio.proyectofinal.dto.ProductoDTO;
 import co.edu.uniquindio.proyectofinal.dto.ProductoGetDTO;
 import co.edu.uniquindio.proyectofinal.modelo.Categoria;
+import co.edu.uniquindio.proyectofinal.modelo.Estado;
 import co.edu.uniquindio.proyectofinal.modelo.Producto;
+import java.util.List;
 
 public interface productoServicio {
 
