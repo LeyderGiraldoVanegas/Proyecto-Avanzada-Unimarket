@@ -18,7 +18,8 @@ public class Compra implements Serializable  {
     @Id
     @Column(nullable = false)
     @EqualsAndHashCode.Include
-    private String codigo;
+    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    private Integer codigo;
 
     private LocalDate fechaCreacion;
     private double valorTotal;

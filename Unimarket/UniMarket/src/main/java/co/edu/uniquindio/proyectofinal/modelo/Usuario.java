@@ -16,7 +16,7 @@ public class Usuario extends Persona implements Serializable  {
 
     @Id
     @EqualsAndHashCode.Include
-    private String cedula;
+    private Integer cedula;
 
     @Column(nullable = false)
     private String direccion;

@@ -14,7 +14,8 @@ import java.util.List;
 public class DetalleCompra implements Serializable {
 
     @Id
-    private String codigo;
+    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    private Integer codigo;
     private  double precioProducto;
 
     @OneToMany

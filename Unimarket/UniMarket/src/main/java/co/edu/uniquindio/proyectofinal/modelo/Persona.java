@@ -15,7 +15,7 @@ public class Persona {
     @Id
     @Column(length = 10)
     @EqualsAndHashCode.Include
-    private String codigo;
+    private Integer codigo;
 
     @Column(nullable = false)
     private String email;
