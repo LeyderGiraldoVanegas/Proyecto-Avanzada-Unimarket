@@ -17,7 +17,7 @@ public class Producto implements Serializable {
    @Id
    @Column(nullable = false)
    @EqualsAndHashCode.Include
-   private String codigo;
+   private Integer codigo;
 
    @Column(nullable = false)
    private int unidades;
