@@ -31,4 +31,7 @@ public class Compra implements Serializable  {
     @Column(nullable = false)
     private List<Usuario> usuarioList;
 
+    @OneToMany
+    private List<DetalleCompra> detalleCompraList;
+
 }

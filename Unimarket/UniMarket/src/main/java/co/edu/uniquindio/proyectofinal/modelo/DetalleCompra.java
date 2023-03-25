@@ -16,6 +16,10 @@ public class DetalleCompra implements Serializable {
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private Integer codigo;
+
+    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    private Integer unidades;
+
     private  double precioProducto;
 
     @OneToMany
