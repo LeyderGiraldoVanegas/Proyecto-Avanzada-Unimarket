@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -14,4 +16,10 @@ public class Moderardor extends Persona implements Serializable {
     @Id
     @EqualsAndHashCode.Include
     private String cedula;
+
+    @OneToOne
+    private List<Usuario> usuarioList;
+
+    @OneToMany
+    private List<Producto> productoList;
 }

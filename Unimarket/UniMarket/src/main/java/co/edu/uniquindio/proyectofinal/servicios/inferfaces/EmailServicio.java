@@ -1,4 +1,4 @@
-package co.edu.uniquindio.proyectofinal.servicios;
+package co.edu.uniquindio.proyectofinal.servicios.inferfaces;
 
 import co.edu.uniquindio.proyectofinal.dto.EmailDTO;
 

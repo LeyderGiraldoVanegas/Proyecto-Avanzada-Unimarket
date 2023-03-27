@@ -19,17 +19,25 @@ public class Usuario extends Persona implements Serializable  {
     private Integer cedula;
 
     @Column(nullable = false)
-    private String direccion;
+    private String telefono;
 
     @Column(nullable = false)
-    private String telefono;
+    private String direccion;
+
+
+    @OneToMany
+    private List<Cupo> cupoList;
 
     @OneToMany
     private List<Compra> compraLista;
 
     @OneToMany
-    private List<Producto> productoListaFaorito;
+    private List<Comentario> comentarioList;
 
     @OneToMany
-    private List<Cupo> cupoList;
+    private List<Producto> productoListaFaorito;
+
+    @OneToOne
+    private List<Persona> personasList;
+
 }

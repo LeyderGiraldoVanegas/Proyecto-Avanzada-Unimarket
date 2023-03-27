@@ -24,5 +24,8 @@ public class Imagen implements Serializable {
     @Column(nullable = false)
     private String idImagen;
 
+    @ManyToOne
+    private List<Producto> productoList ;
+
 
 }
