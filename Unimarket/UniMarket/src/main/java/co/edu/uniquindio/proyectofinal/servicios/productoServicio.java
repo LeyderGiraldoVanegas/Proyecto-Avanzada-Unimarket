@@ -14,12 +14,12 @@ public interface productoServicio {
    Producto obtenerProducto (int codigoProducto);
    ProductoGetDTO eliminarProducto(int codigoProducto);
 
-   List<ProductoGetDTO> listaProductosUsuario(int codigoUsuario);
-   List<ProductoGetDTO> listaProductosCategoria(Categoria categoria);
-   List<ProductoGetDTO> listaProductosPorEstado(Estado estado);
-
-   List<ProductoGetDTO> listarProductoFavoritos(int codigoUsuario);
-
-   List<ProductoGetDTO>  listarProductoNombre(String nombre);
-   List<ProductoGetDTO> listarProductoPrecio(float precioMinimo, float precioMaximo);
+   //List<ProductoGetDTO> listaProductosUsuario(int codigoUsuario);
+   //List<ProductoGetDTO> listaProductosCategoria(Categoria categoria);
+//   List<ProductoGetDTO> listaProductosPorEstado(Estado estado);
+//
+//   List<ProductoGetDTO> listarProductoFavoritos(int codigoUsuario);
+//
+//   List<ProductoGetDTO>  listarProductoNombre(String nombre);
+//   List<ProductoGetDTO> listarProductoPrecio(float precioMinimo, float precioMaximo);
 }
