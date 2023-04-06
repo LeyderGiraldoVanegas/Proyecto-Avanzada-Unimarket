@@ -10,16 +10,9 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+//@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Moderardor extends Persona implements Serializable {
 
-    @Id
-    @EqualsAndHashCode.Include
-    private String cedula;
-
-    @OneToOne
-    private List<Usuario> usuarioList;
-
-    @OneToMany
+    @OneToMany(mappedBy = "moderardor")
     private List<Producto> productoList;
 }

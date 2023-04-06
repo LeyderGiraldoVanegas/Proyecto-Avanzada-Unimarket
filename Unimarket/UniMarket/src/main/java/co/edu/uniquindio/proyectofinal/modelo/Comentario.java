@@ -23,7 +23,7 @@ public class Comentario {
     private LocalDate FechaCreacion;
 
     @ManyToOne
-    private List<Usuario> usuarioList;
+    private Usuario usuarioList;
     @ManyToOne
-    private List<Producto> productoList;
+    private Producto productoList;
 }

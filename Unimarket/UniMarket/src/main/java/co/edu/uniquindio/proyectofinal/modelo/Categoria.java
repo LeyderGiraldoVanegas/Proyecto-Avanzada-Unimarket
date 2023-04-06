@@ -1,17 +1,18 @@
 package co.edu.uniquindio.proyectofinal.modelo;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Categoria {
+@Entity
+public class Categoria implements Serializable {
 
+    @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private Integer codigo;
     private String nombre;
 
     @ManyToOne
-    private List<Producto> productoList ;
+    private Producto productoList ;
 }

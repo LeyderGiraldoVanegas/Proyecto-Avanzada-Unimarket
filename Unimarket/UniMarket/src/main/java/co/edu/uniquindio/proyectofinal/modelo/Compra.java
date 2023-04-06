@@ -24,14 +24,12 @@ public class Compra implements Serializable  {
     private LocalDate fechaCreacion;
     private double valorTotal;
 
-    @ElementCollection
-    @Column(nullable = false)
-    private List<MedioPago> medioPago;
-    @OneToMany
-    @Column(nullable = false)
-    private List<Usuario> usuarioList;
+    private MedioPago medioPago;
 
-    @OneToMany
+    @ManyToOne
+    private Usuario usuarioList;
+
+    @OneToMany(mappedBy = "compraList")
     private List<DetalleCompra> detalleCompraList;
 
 }

@@ -7,17 +7,17 @@ import co.edu.uniquindio.proyectofinal.modelo.Estado;
 import co.edu.uniquindio.proyectofinal.modelo.Producto;
 import java.util.List;
 
-public interface productoServicio {
+public interface ProductoServicio {
 
-   int  craerProducto(ProductoDTO productoDTO);
-   int  actualizarProducto(int codigoProducto, ProductoDTO productoDTO);
+   int  craerProducto(ProductoDTO productoDTO) throws  Exception;
+   int  actualizarProducto(int codigoProducto, ProductoDTO productoDTO)throws Exception;
 
-   int actualizarUnidades(int codigoProducto, int unidades);
+   int actualizarUnidades(int codigoProducto, int unidades)throws Exception;
 
-   int actualizarEstado(int codigoProducto, Estado estado);
+   int actualizarEstado(int codigoProducto, Estado estado)throws Exception;
 
-   int eliminarProducto(int codigoProducto);
-   Producto obtenerProducto (int codigoProducto);
+   int eliminarProducto(int codigoProducto)throws Exception;
+   Producto obtenerProducto (int codigoProducto)throws Exception;
 
    // ProductoGetDTO eliminarProducto(int codigoProducto);
 
