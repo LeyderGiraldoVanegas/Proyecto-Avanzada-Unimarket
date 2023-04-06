@@ -5,19 +5,20 @@ import co.edu.uniquindio.proyectofinal.dto.UsuarioGetDTO;
 import co.edu.uniquindio.proyectofinal.modelo.Usuario;
 import co.edu.uniquindio.proyectofinal.repositorios.UsuarioRepo;
 import co.edu.uniquindio.proyectofinal.servicios.inferfaces.UsuarioServicio;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
+@Service
+@AllArgsConstructor
 public class UsuarioServicioImpl implements UsuarioServicio {
 
     private final UsuarioRepo usuarioRepo;
 
-    public UsuarioServicioImpl(UsuarioRepo usuarioRepo) {
-        this.usuarioRepo = usuarioRepo;
-    }
-
     @Override
-    public int crearUsuario(UsuarioDTO usuarioDTO) throws Exception {
+    public int crearUsuario(UsuarioDTO usuarioDTO) throws Exception{
 
         Usuario buscado = usuarioRepo.buscarUsuario(usuarioDTO.getEmail());
 
@@ -29,20 +30,9 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         return usuarioRepo.save( usuario ).getCodigo();
     }
 
-    private Usuario convertir(UsuarioDTO usuarioDTO){
-
-        Usuario usuario = new Usuario();
-        usuario.setNombre( usuarioDTO.getNombre() );
-        usuario.setEmail( usuarioDTO.getEmail() );
-        usuario.setDireccion( usuarioDTO.getDireccion() );
-        usuario.setTelefono( usuarioDTO.getTelefono() );
-        usuario.setPassword( usuarioDTO.getPassword() );
-
-        return usuario;
-    }
-    
     @Override
-    public int actualizarUsuario(int codigoUsuario, UsuarioDTO usuarioDTO) throws Exception {
+    public UsuarioGetDTO actualizarUsuario(int codigoUsuario, UsuarioDTO usuarioDTO) throws Exception{
+
         /**
          * TODO Validar que el correo no se repita
          */
@@ -52,7 +42,29 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         Usuario usuario = convertir(usuarioDTO);
         usuario.setCodigo(codigoUsuario);
 
-        return usuarioRepo.save(usuario).getCodigo();
+        return convertir( usuarioRepo.save(usuario) );
+    }
+
+    @Override
+    public int eliminiarUsuario(int codigoUsuario) throws Exception{
+        validarExiste(codigoUsuario);
+        usuarioRepo.deleteById(codigoUsuario);
+        return codigoUsuario;
+    }
+
+    @Override
+    public UsuarioGetDTO obtenerUsuario(int codigoUsuario) throws Exception{
+        return convertir( obtener(codigoUsuario) );
+    }
+
+    public Usuario obtener(int codigoUsuario) throws Exception{
+        Optional<Usuario> usuario = usuarioRepo.findById(codigoUsuario);
+
+        if(usuario.isEmpty() ){
+            throw new Exception("El código "+codigoUsuario+" no está asociado a ningún usuario");
+        }
+
+        return usuario.get();
     }
 
     private void validarExiste(int codigoUsuario) throws Exception{
@@ -62,18 +74,6 @@ public class UsuarioServicioImpl implements UsuarioServicio {
             throw new Exception("El código "+codigoUsuario+" no está asociado a ningún usuario");
         }
 
-    }
-
-    @Override
-    public int eliminiarUsuario(int codigoUsuario) throws Exception {
-        validarExiste(codigoUsuario);
-        usuarioRepo.deleteById(codigoUsuario);
-        return codigoUsuario;
-    }
-
-    @Override
-    public UsuarioGetDTO obtenerUsuario(int codigoUsuario) throws Exception {
-        return convertir( obtener(codigoUsuario) );
     }
 
     private UsuarioGetDTO convertir(Usuario usuario){
@@ -88,13 +88,15 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         return usuarioDTO;
     }
 
-    private Usuario obtener(int codigoUsuario) throws Exception{
-        Optional<Usuario> usuario = usuarioRepo.findById(codigoUsuario);
+    private Usuario convertir(UsuarioDTO usuarioDTO){
 
-        if(usuario.isEmpty() ){
-            throw new Exception("El código "+codigoUsuario+" no está asociado a ningún usuario");
-        }
+        Usuario usuario = new Usuario();
+        usuario.setNombre( usuarioDTO.getNombre() );
+        usuario.setEmail( usuarioDTO.getEmail() );
+        usuario.setDireccion( usuarioDTO.getDireccion() );
+        usuario.setTelefono( usuarioDTO.getTelefono() );
+        usuario.setPassword( usuarioDTO.getPassword() );
 
-        return usuario.get();
+        return usuario;
     }
 }

@@ -24,5 +24,5 @@ public class Cupo implements Serializable {
     private LocalDate fechaLimite;
 
     @ManyToOne
-    private List<Usuario> usuarioList;
+    private Usuario usuarioList;
 }

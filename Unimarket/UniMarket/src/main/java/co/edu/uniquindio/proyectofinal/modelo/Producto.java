@@ -5,6 +5,7 @@ import lombok.*;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -26,58 +27,47 @@ public class Producto implements Serializable {
    private String descripcion;
 
    @Column(nullable = false)
-   private  double precio;
-
-   @Column(nullable = false)
-   private String disponilidad;
+   private  float precio;
 
    @Column(nullable = false)
    private int cantidad;
 
+   @ElementCollection
    @Column(nullable = false)
-   private String archivo;
+   private List<String> archivo;
+
    @Column(nullable = false)
    private int numeroFavorito;
 
    @Column(nullable = false)
-   private String fechaCreado;
+   private LocalDateTime fechaCreado;
 
    @Column(nullable = false)
-   private LocalDate fechaLimite;
-
-   @Column(nullable = false)
-   private LocalDate codigoVendedor;
+   private LocalDateTime fechaLimite; //LocalDateTime
 
    @Column(nullable = false)
    private int numeroLike;
 
-   @ManyToMany
+   @Column(nullable = false)
+   private Estado estados;
+
+   @ManyToMany(mappedBy = "productoListaFaorito")
    private List<Usuario> favoritos;
 
-   @ElementCollection
-   @Column(nullable = false)
-   private List<Estado> estados;
-
+   @ManyToOne
+   private Moderardor moderardor;
 
    @ManyToOne
-   private List<Moderardor> moderardorList;
+   private Usuario usuario;
 
-   @ManyToOne
-   private List<Usuario> usuarioList;
-
-   @OneToMany
+   @OneToMany(mappedBy = "productoList")
    private List<Comentario> comentarioList;
 
-   @OneToMany
+   @OneToMany(mappedBy = "productoList")
    private List<Categoria> categorias;
 
-   @OneToMany
-   private List<Imagen> imagens;
-
-   @OneToMany
+   @OneToMany(mappedBy = "productoList")
    private List<DetalleCompra> detalleCompras;
-
-
 
 
 }

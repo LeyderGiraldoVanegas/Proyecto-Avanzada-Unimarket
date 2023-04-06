@@ -26,9 +26,4 @@ public class Persona {
     @Column(nullable = false)
     private String password;
 
-    @OneToOne
-    private List<Usuario> usuarioList;
-
-    @OneToOne
-    private List<Moderardor> moderardorList;
 }

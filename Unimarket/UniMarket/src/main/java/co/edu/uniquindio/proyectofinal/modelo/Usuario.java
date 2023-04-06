@@ -11,12 +11,8 @@ import java.util.List;
 @Getter
 @Entity
 @ToString
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+//@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Usuario extends Persona implements Serializable  {
-
-    @Id
-    @EqualsAndHashCode.Include
-    private Integer cedula;
 
     @Column(nullable = false)
     private String telefono;
@@ -25,19 +21,17 @@ public class Usuario extends Persona implements Serializable  {
     private String direccion;
 
 
-    @OneToMany
+    @OneToMany(mappedBy = "usuarioList")
     private List<Cupo> cupoList;
 
-    @OneToMany
+    @OneToMany(mappedBy = "usuarioList")
     private List<Compra> compraLista;
 
-    @OneToMany
+    @OneToMany(mappedBy = "usuarioList")
     private List<Comentario> comentarioList;
 
-    @OneToMany
+    @ManyToMany
     private List<Producto> productoListaFaorito;
 
-    @OneToOne
-    private List<Persona> personasList;
 
 }

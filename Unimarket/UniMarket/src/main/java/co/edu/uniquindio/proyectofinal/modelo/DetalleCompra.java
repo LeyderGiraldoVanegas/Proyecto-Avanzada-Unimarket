@@ -22,11 +22,9 @@ public class DetalleCompra implements Serializable {
 
     private  double precioProducto;
 
-    @OneToMany
-    @Column(nullable = false)
-    private List<Compra> compraList;
+    @ManyToOne
+    private Compra compraList;
 
-    @OneToMany
-    @Column(nullable = false)
-    private List<Producto> productoList;
+    @ManyToOne
+    private Producto productoList;
 }
