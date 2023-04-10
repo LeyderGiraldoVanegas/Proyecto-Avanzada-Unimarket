@@ -66,7 +66,7 @@ public class ProductoServicioImpl implements ProductoServicio {
         return null;
     }
 
-    @Override
+    //@Override
     public List<ProductoGetDTO> listaProductosUsuario(int codigoUsuario) {
         List<Producto> lista = productoRepo.listarProductosUsuario(codigoUsuario);
         List<ProductoGetDTO> respuesta = new ArrayList<>();
@@ -96,22 +96,22 @@ public class ProductoServicioImpl implements ProductoServicio {
         return productoGetDTO;
     }
 
-    @Override
+    //@Override
     public List<ProductoGetDTO> listaProductosCategoria(Categoria categoria) {
         return null;
     }
 
-    @Override
+   // @Override
     public List<ProductoGetDTO> listaProductosPorEstado(Estado estado) {
         return null;
     }
 
-    @Override
+  //  @Override
     public List<ProductoGetDTO> listarProductoFavoritos(int codigoUsuario) {
         return null;
     }
 
-    @Override
+   // @Override
     public List<ProductoGetDTO> listarProductoNombre(String nombre) {
         List<Producto> lista = productoRepo.listarProductosNombre(nombre);
         List<ProductoGetDTO> respuesta = new ArrayList<>();
@@ -123,7 +123,7 @@ public class ProductoServicioImpl implements ProductoServicio {
         return respuesta;
     }
 
-    @Override
+   // @Override
     public List<ProductoGetDTO> listarProductoPrecio(float precioMinimo, float precioMaximo) {
         return null;
     }
