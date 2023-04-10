@@ -1,2 +1,15 @@
-package co.edu.uniquindio.proyecto.dto;public class EmailDTO {
+package co.edu.uniquindio.proyecto.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
+@AllArgsConstructor
+@Getter
+@Setter
+public class EmailDTO {
+
+    private String asunto;
+    private String Cuerpo;
+    private String Destinatario;
 }

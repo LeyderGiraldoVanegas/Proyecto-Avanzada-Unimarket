@@ -1,2 +1,5 @@
-package co.edu.uniquindio.proyecto.modelo;public class Activo {
+package co.edu.uniquindio.proyecto.modelo;
+
+public enum Activo {
+    INACTIVO
 }

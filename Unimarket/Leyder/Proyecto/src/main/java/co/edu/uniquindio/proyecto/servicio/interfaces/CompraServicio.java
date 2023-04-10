@@ -1,4 +1,4 @@
-package co.edu.uniquindio.proyecto.servicio.implementacion;
+package co.edu.uniquindio.proyecto.servicio.interfaces;
 
 import co.edu.uniquindio.proyecto.dto.CompraDTO;
 import co.edu.uniquindio.proyecto.dto.CompraGetDTO;
