@@ -1,27 +1,24 @@
 package co.edu.uniquindio.proyectofinal.dto;
 
-import co.edu.uniquindio.proyectofinal.modelo.MedioPago;
+import co.edu.uniquindio.proyectofinal.modelo.Cupon;
+import co.edu.uniquindio.proyectofinal.modelo.DetalleCompra;
+import co.edu.uniquindio.proyectofinal.modelo.Usuario;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
 @AllArgsConstructor
-@Getter
 @Setter
+@Getter
 public class CompraGetDTO {
-
-    private int codigo;
-
+    private int codigoCompra;
     private LocalDateTime fecha;
-
     private float valorTotal;
-
-    private int codigoUsuario;
-
-    private MedioPago medioPago;
-
-    private List<DetalleCompraDTO> detalleCompraDTO;
-
+    private String metodoPago;
+    private Usuario codigoUsuario;
+    private List<DetalleCompra> detalleCompraList;
+    private List<Cupon>  cuponList;
 }

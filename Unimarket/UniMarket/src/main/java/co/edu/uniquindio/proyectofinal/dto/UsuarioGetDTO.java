@@ -3,12 +3,10 @@ package co.edu.uniquindio.proyectofinal.dto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 @AllArgsConstructor
 @Getter
 @Setter
-@ToString
 public class UsuarioGetDTO {
 
     private int codigo;
@@ -19,6 +17,5 @@ public class UsuarioGetDTO {
 
     private String direccion;
 
-    private String telefono;
-
+    private Integer telefono;
 }

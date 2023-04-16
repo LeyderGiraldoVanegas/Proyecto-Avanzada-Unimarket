@@ -5,28 +5,38 @@ import co.edu.uniquindio.proyectofinal.dto.ProductoGetDTO;
 import co.edu.uniquindio.proyectofinal.modelo.Categoria;
 import co.edu.uniquindio.proyectofinal.modelo.Estado;
 import co.edu.uniquindio.proyectofinal.modelo.Producto;
+
 import java.util.List;
 
 public interface ProductoServicio {
 
-   int  craerProducto(ProductoDTO productoDTO) throws  Exception;
-   int  actualizarProducto(int codigoProducto, ProductoDTO productoDTO)throws Exception;
+    int crearProducto(ProductoDTO productoDTO) throws Exception;
 
-   int actualizarUnidades(int codigoProducto, int unidades)throws Exception;
+    int actualizarProducto(int codigoProducto, ProductoDTO productoDTO) throws Exception;
 
-   int actualizarEstado(int codigoProducto, Estado estado)throws Exception;
+    int actualizarUnidades(int codigoProducto, int unidades) throws Exception;
 
-   int eliminarProducto(int codigoProducto)throws Exception;
-   Producto obtenerProducto (int codigoProducto)throws Exception;
+    int actualizarEstado(int codigoProducto, Estado estado) throws Exception;
 
-   // ProductoGetDTO eliminarProducto(int codigoProducto);
+    int eliminarProducto(int codigoProducto) throws Exception;
 
-   List<ProductoGetDTO> listaProductosUsuario(int codigoUsuario);
-   List<ProductoGetDTO> listaProductosCategoria(Categoria categoria);
-   List<ProductoGetDTO> listaProductosPorEstado(Estado estado);
+    int eliminarUnidades(int codigoUnidades) throws Exception;
 
-   List<ProductoGetDTO> listarProductoFavoritos(int codigoUsuario);
+    int eliminarEstado(int codigoEstado)throws Exception;
 
-   List<ProductoGetDTO>  listarProductoNombre(String nombre);
-   List<ProductoGetDTO> listarProductoPrecio(float precioMinimo, float precioMaximo);
+    Producto obtenerProducto(int codigoProducto) throws Exception;
+
+
+    List<ProductoGetDTO> listarProductosUsuario(int codigoUsuario);
+
+    List<ProductoGetDTO> listarProductosCategoria(Categoria categoria);
+
+    List<ProductoGetDTO> listarProductosPorEstado(Estado estado);
+
+    List<ProductoGetDTO> listarProductosFavoritos(int codigoUsuario) throws Exception;
+
+    List<ProductoGetDTO> listarProductosNombre(String nombre);
+
+    List<ProductoGetDTO> listarProductosPrecio(float precioMinimo, float precioMaximo);
+
 }

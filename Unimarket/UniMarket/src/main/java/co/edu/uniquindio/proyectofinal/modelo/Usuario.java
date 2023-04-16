@@ -1,37 +1,78 @@
 package co.edu.uniquindio.proyectofinal.modelo;
 
-import jakarta.persistence.*;
-import lombok.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.List;
 
-@NoArgsConstructor
-@Setter
+
+// Getter and Setter = Obtener y enviar a todos
+// los atributos que tenemos declarados en nuestra clase
+//
+// Entity = Cuando corra se vuelve una tabla en nuestra BD
+//
+// Equals And Hash Code = Nos ayuda a la hora de comparar objetos
+// los compara en la tabla Hash
+
+/**
+ * Usuario es una tabla que tiene como atributos:
+ * código, teléfono, dirección y los atributos de la clase Persona.
+ */
 @Getter
+@Setter
 @Entity
-@ToString
 //@EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Usuario extends Persona implements Serializable  {
+public class Usuario extends Persona implements Serializable {
 
-    @Column(nullable = false)
-    private String telefono;
+    /**
+     * Column nullable = Validamos que el teléfono sea diferente de null
+     */
+    @Column(nullable = false,length = 10)
+    private Integer telefono;
 
+    /**
+     * Column nullable = Validamos que la dirección sea diferente de null
+     */
     @Column(nullable = false)
     private String direccion;
 
+    /**
+     *
+     */
+    @OneToMany(mappedBy = "usuario")
+    private List<Producto> productoList;
 
-    @OneToMany(mappedBy = "usuarioList")
-    private List<Cupo> cupoList;
-
-    @OneToMany(mappedBy = "usuarioList")
-    private List<Compra> compraLista;
-
-    @OneToMany(mappedBy = "usuarioList")
+    /**
+     *
+     */
+    @OneToMany(mappedBy = "usuarioComentario")
     private List<Comentario> comentarioList;
 
+    /**
+     *
+     */
+    @OneToMany(mappedBy = "usuarioCompra")
+    private List<Compra> compraList;
+
+    /**
+     *
+     */
+    @OneToMany(mappedBy = "usuarioCupon")
+    private List<Cupon> cuponList;
+
+    /**
+     *
+     */
     @ManyToMany
-    private List<Producto> productoListaFaorito;
-
-
+    private List<Producto> productoListFavorito;
+    /**
+     *
+     */
+    @ManyToMany
+    private List<Producto> productoFavoritoList;
 }

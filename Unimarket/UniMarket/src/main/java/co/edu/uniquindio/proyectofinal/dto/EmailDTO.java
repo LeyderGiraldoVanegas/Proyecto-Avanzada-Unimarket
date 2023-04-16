@@ -10,7 +10,6 @@ import lombok.Setter;
 public class EmailDTO {
 
     private String asunto;
-    private String cuerpo;
-    private String destinatario;
-
+    private String Cuerpo;
+    private String Destinatario;
 }

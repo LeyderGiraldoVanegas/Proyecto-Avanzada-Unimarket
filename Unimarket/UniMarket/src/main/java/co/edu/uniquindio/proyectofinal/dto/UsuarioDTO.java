@@ -8,17 +8,20 @@ import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
 @AllArgsConstructor
-@Setter
 @Getter
+@Setter
 public class UsuarioDTO {
+
     @NotNull
     @NotBlank
-    @Length(max = 150, message = "El nombre debe tener máximo 100 caracteres")
+    @Length(max = 150, message = "El nombre debe tener máximo 150 caracteres")
+
     private String nombre;
 
     @NotNull
     @NotBlank
     @Length(max = 100, message = "El correo debe tener máximo 100 caracteres")
+
     private String email;
 
     @NotNull
@@ -29,11 +32,12 @@ public class UsuarioDTO {
     @NotNull
     @NotBlank
     @Length(max = 100, message = "La dirección debe tener máximo 100 caracteres")
+
     private String direccion;
 
     @NotNull
     @NotBlank
     @Length(max = 12, message = "El teléfono debe tener máximo 12 caracteres")
-    private String telefono;
 
+    private Integer telefono;
 }

@@ -1,29 +1,72 @@
 package co.edu.uniquindio.proyectofinal.modelo;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import lombok.*;
 
-import java.time.LocalDate;
-import java.util.List;
+import java.time.LocalDateTime;
+
+// Getter and Setter = Obtener y enviar a todos
+// los atributos que tenemos declarados en nuestra clase
+//
+// NoArgsConstructor = Un constructor sin argumentos generado
+// automáticamente por Lombok.
+//
+// ToString = Se utiliza para generar automáticamente el método toString() de una clase.
+//
+// Entity = Se usa para indicar que una clase es una entidad que se
+// puede mapear a una tabla de base de datos.
+//
+// EqualsAndHashCode = Se emplear para comparar objetos y
+// almacenarlos en estructuras de datos hash
+//
+// EqualsAndHashCode(onlyExplicitlyIncluded = true) = Permite incluir solo
+// los atributos que se marcan explícitamente con la anotación
+// @EqualsAndHashCode.Include.
+
+/**
+ * El comentario tiene como atributos
+ * código, mensaje, fechaCreación
+ */
 @Entity
+@ToString
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Comentario {
-    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    /**
+     * Cada comentario debe tener por lo menos
+     * Un código que lo identifique
+     */
     @Id
-    private Integer codigo;
+    @EqualsAndHashCode.Include
+    private Integer codigoComentario;
+    /**
+     * Mensaje está validado con un Column nullable
+     * para que no puedan ingresar valores nulos
+     */
 
-    @Column(nullable = false, length = 150)
-    private String mesnsaje;
+    private String mensaje;
+    /**
+     * La fecha de creación está dada por la
+     * necesidad de mostrar la hora necesaria
+     */
 
-    @Column(nullable = false)
-    private LocalDate FechaCreacion;
+    private LocalDateTime fechaCreacion;
 
+    /**
+     *
+     */
     @ManyToOne
-    private Usuario usuarioList;
+    private Producto productoComentario;
+
+    /**
+     *
+     */
     @ManyToOne
-    private Producto productoList;
+    private Usuario usuarioComentario;
+
 }
+

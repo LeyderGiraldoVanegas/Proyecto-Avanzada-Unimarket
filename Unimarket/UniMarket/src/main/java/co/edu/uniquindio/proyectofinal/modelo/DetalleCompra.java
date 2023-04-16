@@ -1,30 +1,61 @@
 package co.edu.uniquindio.proyectofinal.modelo;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import lombok.*;
 
-import java.io.Serializable;
-import java.util.List;
-@NoArgsConstructor
-@Setter
-@Getter
+// Getter and Setter = Obtener y enviar a todos
+// los atributos que tenemos declarados en nuestra clase
+//
+// NoArgsConstructor = Un constructor sin argumentos generado
+// automáticamente por Lombok.
+//
+// ToString = Se utiliza para generar automáticamente el método toString() de una clase.
+//
+// Entity = Se usa para indicar que una clase es una entidad que se
+// puede mapear a una tabla de base de datos.
+//
+// EqualsAndHashCode = Se emplear para comparar objetos y
+// almacenarlos en estructuras de datos hash
+//
+// EqualsAndHashCode(onlyExplicitlyIncluded = true) = Permite incluir solo
+// los atributos que se marcan explícitamente con la anotación
+// @EqualsAndHashCode.Include.
+
+/**
+ * Los atributos necesarios para la clase de DetalleCompra son:
+ * código, unidades y precioProducto
+ */
 @Entity
+@Getter
+@Setter
 @ToString
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class DetalleCompra implements Serializable {
-
+@NoArgsConstructor
+public class DetalleCompra {
+    /**
+     * El código es la PK de la clase DetalleCompra
+     */
     @Id
-    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    @EqualsAndHashCode.Include
     private Integer codigo;
 
-    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    /**
+     * Unidades
+     */
+    @Column(nullable = false)
     private Integer unidades;
 
-    private  double precioProducto;
+    @Column(nullable = false)
+    private float precioProducto;
+
 
     @ManyToOne
-    private Compra compraList;
+    private Compra compra;
 
     @ManyToOne
-    private Producto productoList;
+    private Producto productoDetalleCompra;
 }
+

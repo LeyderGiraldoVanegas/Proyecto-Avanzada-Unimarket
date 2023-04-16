@@ -3,26 +3,30 @@ package co.edu.uniquindio.proyectofinal.modelo;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.List;
 
-@NoArgsConstructor
+@Entity
 @Setter
 @Getter
-@Entity
-@ToString
+@NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Cupo implements Serializable {
+@ToString
+public class Cupon {
+
     @Id
-    @GeneratedValue(strategy =  GenerationType.IDENTITY)
-    private Integer codigo;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer codigoCupon;
 
     private double porcentaje;
-
-    @Column(nullable = false)
+    /**
+     * ! Esto se tiene que cambiar¡
+     */
     private LocalDate fechaLimite;
 
     @ManyToOne
-    private Usuario usuarioList;
+    private Usuario usuarioCupon;
+
+    @ManyToOne
+    private Compra compraCupon;
+
 }

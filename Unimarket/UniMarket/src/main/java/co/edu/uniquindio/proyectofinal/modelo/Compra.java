@@ -3,33 +3,33 @@ package co.edu.uniquindio.proyectofinal.modelo;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
 @Setter
 @Getter
 @NoArgsConstructor
+//@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Compra implements Serializable  {
-
+public class Compra {
     @Id
-    @Column(nullable = false)
     @EqualsAndHashCode.Include
-    @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private Integer codigo;
-
-    private LocalDate fechaCreacion;
-    private double valorTotal;
-
-    private MedioPago medioPago;
+    @Column(nullable = false)
+    private LocalDateTime fecahaCreacion;
+    @Column(nullable = false)
+    private float valorTotal;
+    @Column(nullable = false)
+    private String medioPago;
 
     @ManyToOne
-    private Usuario usuarioList;
-
-    @OneToMany(mappedBy = "compraList")
+    private Usuario usuarioCompra;
+    @OneToMany(mappedBy = "compra")
     private List<DetalleCompra> detalleCompraList;
 
+    @OneToMany(mappedBy = "compraCupon")
+    private List<Cupon> cuponList;
+
 }
+
