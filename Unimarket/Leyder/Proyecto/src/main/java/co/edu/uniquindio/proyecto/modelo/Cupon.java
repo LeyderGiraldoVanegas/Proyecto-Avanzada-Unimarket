@@ -1,10 +1,9 @@
 package co.edu.uniquindio.proyecto.modelo;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.*;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
@@ -13,9 +12,11 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
-public class Cupon {
+public class Cupon implements Serializable {
+
     @Id
-    private Integer codigo;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer codigoCupon;
 
     private double porcentaje;
     /**

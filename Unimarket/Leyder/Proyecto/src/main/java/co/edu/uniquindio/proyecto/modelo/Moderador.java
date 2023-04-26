@@ -1,10 +1,12 @@
 package co.edu.uniquindio.proyecto.modelo;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import lombok.*;
 
+import java.io.Serializable;
 import java.util.List;
 
 // Getter and Setter = Obtener y enviar a todos
@@ -24,10 +26,18 @@ import java.util.List;
 @Setter
 @Getter
 @NoArgsConstructor
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@ToString
-public class Moderador extends  Persona{
+@ToString(callSuper = true)
+public class Moderador extends  Persona implements Serializable {
 
+    @Column(nullable = false, unique = true)
+    private Integer codigo;
     @OneToMany(mappedBy = "moderador")
     private List<Producto> productoList;
+
+    public Moderador(Integer cedula, String nombre, String email, String password,Integer codigo) {
+        super(cedula, nombre, email, password);
+        this.codigo=codigo;
+    }
+
+
 }

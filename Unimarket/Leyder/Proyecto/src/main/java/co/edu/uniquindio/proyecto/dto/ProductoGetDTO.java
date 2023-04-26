@@ -15,7 +15,7 @@ public class ProductoGetDTO {
 
     private int codigo;
 
-   // private Activo estado;
+    private String estado;
 
     private LocalDateTime fechaLimite;
 

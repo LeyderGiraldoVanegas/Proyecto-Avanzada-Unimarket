@@ -1,5 +1,7 @@
 package co.edu.uniquindio.proyecto.dto;
 
+import co.edu.uniquindio.proyecto.modelo.Producto;
+import co.edu.uniquindio.proyecto.modelo.Usuario;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,13 +13,11 @@ import java.time.LocalDateTime;
 @Setter
 public class ComentarioGetDTO {
 
-    private int codigo;
 
-    private LocalDateTime fecha;
+    private LocalDateTime fechaCreacion;
 
     private String mensaje;
 
-    private int codigoUsuario;
-
-    private int codigoProducto;
+    private Producto productoComentario;
+    private Usuario usuarioComentario;
 }

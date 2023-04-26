@@ -1,10 +1,9 @@
 package co.edu.uniquindio.proyecto.modelo;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.io.Serializable;
 
 // Getter and Setter = Obtener y enviar a todos
 // los atributos que tenemos declarados en nuestra clase
@@ -34,12 +33,14 @@ import lombok.*;
 @ToString
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @NoArgsConstructor
-public class DetalleCompra {
+@AllArgsConstructor
+public class DetalleCompra implements Serializable {
     /**
      * El código es la PK de la clase DetalleCompra
      */
     @Id
     @EqualsAndHashCode.Include
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //es mejor que sea auto incrementable
     private Integer codigo;
 
     /**
@@ -57,4 +58,6 @@ public class DetalleCompra {
 
     @ManyToOne
     private Producto productoDetalleCompra;
+
+
 }

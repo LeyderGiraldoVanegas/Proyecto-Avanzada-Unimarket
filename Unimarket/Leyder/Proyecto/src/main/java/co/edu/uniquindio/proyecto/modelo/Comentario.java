@@ -1,11 +1,9 @@
 package co.edu.uniquindio.proyecto.modelo;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.*;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 // Getter and Setter = Obtener y enviar a todos
@@ -36,13 +34,14 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Comentario {
+public class Comentario implements Serializable {
     /**
      * Cada comentario debe tener por lo menos
      * Un código que lo identifique
      */
     @Id
     @EqualsAndHashCode.Include
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer codigo;
     /**
      * Mensaje está validado con un Column nullable

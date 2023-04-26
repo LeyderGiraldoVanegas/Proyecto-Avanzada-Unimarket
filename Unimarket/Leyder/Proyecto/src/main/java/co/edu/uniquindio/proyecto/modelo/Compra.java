@@ -3,6 +3,7 @@ package co.edu.uniquindio.proyecto.modelo;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -10,11 +11,13 @@ import java.util.List;
 @Setter
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
-public class Compra {
+public class Compra implements Serializable {
     @Id
     @EqualsAndHashCode.Include
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //es mejor que sea auto incrementable
     private Integer codigo;
     @Column(nullable = false)
     private LocalDateTime fecahaCreacion;

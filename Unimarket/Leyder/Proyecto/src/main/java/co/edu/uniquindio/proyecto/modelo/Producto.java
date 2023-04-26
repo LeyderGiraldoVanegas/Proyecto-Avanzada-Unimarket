@@ -32,6 +32,7 @@ import java.util.List;
 @ToString
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
+@AllArgsConstructor
 public class Producto implements Serializable {
     /**
      * Id = Hacemos que sea la primari key
@@ -42,8 +43,9 @@ public class Producto implements Serializable {
      * equals() y hashCode() de una clase.
      */
     @Id
-    @Column(nullable = false)
     @EqualsAndHashCode.Include
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+ //   @GeneratedValue(strategy = GenerationType.IDENTITY) //es auto incrementable
     private Integer codigo;
 
     /**
@@ -85,7 +87,7 @@ public class Producto implements Serializable {
      * Column nullable = Se refiere a que el campo de la tabla
      * de la base de datos no puede ser nulo.
      */
-    @Column(nullable = false)
+   // @Column(nullable = false)
     private LocalDateTime fechaCreacion;
 
     /**

@@ -1,11 +1,12 @@
 package co.edu.uniquindio.proyecto.modelo;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Id;
-import jakarta.persistence.MappedSuperclass;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import lombok.*;
+import org.hibernate.validator.constraints.Length;
+
+import java.io.Serializable;
 
 
 // MappedSuperclass = se utiliza para indicar que una clase es una superclase
@@ -26,15 +27,19 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Persona {
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+public class Persona implements Serializable {
     /**
      * Id = Es el identificador de la clase
      * Column length = limita el tamaño del atributo
      * Equals And Hash Code = A la hora de comparar el objeto lo compara en el HashCode
      */
     @Id
-    @Column(length = 10)
     @EqualsAndHashCode.Include
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //es mejor que sea auto incrementable
     private Integer codigo;
 
     /**
@@ -48,7 +53,10 @@ public class Persona {
      * Column Nullable = Validamos que el email sea
      * diferente de null
      */
-    @Column(nullable = false)
+
+    @NotBlank
+    @Email
+    @Column(nullable = false,unique = true,length = 150)
     private String email;
 
     /**

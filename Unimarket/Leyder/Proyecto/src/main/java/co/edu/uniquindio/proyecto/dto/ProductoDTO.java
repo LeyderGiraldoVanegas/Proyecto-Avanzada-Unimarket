@@ -18,8 +18,6 @@ import java.util.List;
 public class ProductoDTO {
 
     @Length(max = 140)
-    @NotBlank
-    @NotNull
     private String nombre;
 
     @NotBlank
@@ -33,6 +31,6 @@ public class ProductoDTO {
     @Positive
     private int codigoVendedor;
     private List<String>  imagenList;
-    private Categoria categoriaList;
+    private List<Categoria> categoriaList;
 
 }

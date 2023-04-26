@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 public class UsuarioGetDTO {
 
-    private int codigo;
+    private Integer codigo;
 
     private String nombre;
 
@@ -17,5 +17,5 @@ public class UsuarioGetDTO {
 
     private String direccion;
 
-    private Integer telefono;
+    private String telefono;
 }

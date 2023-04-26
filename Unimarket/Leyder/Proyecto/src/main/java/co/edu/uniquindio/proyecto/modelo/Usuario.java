@@ -3,6 +3,7 @@ package co.edu.uniquindio.proyecto.modelo;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
@@ -25,13 +26,22 @@ import java.util.List;
 @Setter
 @Entity
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@NoArgsConstructor
 public class Usuario extends Persona implements Serializable {
+
+    /** public Persona_Administrador(String cedula, String nombreCompleto, String email, String contrasena, Ciudad ciudad) {
+     super(cedula, nombreCompleto, email, contrasena, ciudad);
+     }*/
+
+ /**   public  Persona_Usuario (String cedula, String nombreCompleto, String email, String contrasena){
+        super()
+    }*/
 
     /**
      * Column nullable = Validamos que el teléfono sea diferente de null
      */
-    @Column(nullable = false,length = 10)
-    private Integer telefono;
+    @Column(nullable = false,length = 12)
+    private String telefono;
 
     /**
      * Column nullable = Validamos que la dirección sea diferente de null
@@ -74,4 +84,12 @@ public class Usuario extends Persona implements Serializable {
      */
     @ManyToMany(mappedBy = "usuarioFavoritoList")
     private List<Producto> productoFavoritoList;
+
+    public Usuario(Integer cedula, String nombre, String email, String password, String telefono , String direccion) {
+        super(cedula, nombre, email, password);
+        this.telefono = telefono;
+        this.direccion = direccion;
+    }
+
+
 }

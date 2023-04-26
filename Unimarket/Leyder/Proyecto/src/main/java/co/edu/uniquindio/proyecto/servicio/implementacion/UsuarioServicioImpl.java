@@ -2,20 +2,43 @@ package co.edu.uniquindio.proyecto.servicio.implementacion;
 
 import co.edu.uniquindio.proyecto.dto.UsuarioDTO;
 import co.edu.uniquindio.proyecto.dto.UsuarioGetDTO;
-import co.edu.uniquindio.proyecto.modelo.Usuario;
-import co.edu.uniquindio.proyecto.repositorios.UsuarioRepo;
+import co.edu.uniquindio.proyecto.modelo.*;
+import co.edu.uniquindio.proyecto.repositorios.*;
 import co.edu.uniquindio.proyecto.servicio.interfaces.UsuarioServicio;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
 @AllArgsConstructor
 public class UsuarioServicioImpl implements UsuarioServicio {
 
+
+    /**
+     * Declaración de atributos
+     */
     private final UsuarioRepo usuarioRepo;
+    private final ProductoRepo productoRepo;
 
+    private final ComentarioRepo comentarioRepo;
+    private final CompraRepo compraRepo;
 
+    private final CuponRepo cuponRepo;
+
+    @Autowired
+    private final PasswordEncoder passwordEncoder;
+
+    /**
+     *
+     * @param usuarioDTO
+     * @return
+     * @throws Exception
+     */
     @Override
     public int crearUsuario(UsuarioDTO usuarioDTO) throws Exception{
 
@@ -29,7 +52,13 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         return usuarioRepo.save( usuario ).getCodigo();
     }
 
-
+    /**
+     *
+     * @param codigoUsuario
+     * @param usuarioDTO
+     * @return
+     * @throws Exception
+     */
     @Override
     public UsuarioGetDTO actualizarUsuario(int codigoUsuario, UsuarioDTO usuarioDTO) throws Exception{
 
@@ -45,7 +74,12 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         return convertir( usuarioRepo.save(usuario) );
     }
 
-
+    /**
+     *
+     * @param codigoUsuario
+     * @return
+     * @throws Exception
+     */
     @Override
     public int eliminiarUsuario(int codigoUsuario) throws Exception{
         validarExiste(codigoUsuario);
@@ -53,12 +87,27 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         return codigoUsuario;
     }
 
-
     @Override
-    public UsuarioGetDTO obtenerUsuario(int codigoUsuario) throws Exception{
+    public UsuarioGetDTO obtenerUsuario(int codigoUsuario) throws Exception {
         return convertir( obtener(codigoUsuario) );
     }
 
+    /**
+     * @param codigoUsuario
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public UsuarioGetDTO obtenerUsuarioGetDTO(int codigoUsuario) throws Exception{
+        return convertir( obtener(codigoUsuario) );
+    }
+
+    /**
+     *
+     * @param codigoUsuario
+     * @return
+     * @throws Exception
+     */
     public Usuario obtener(int codigoUsuario) throws Exception{
         Optional<Usuario> usuario = usuarioRepo.findById(codigoUsuario);
 
@@ -69,6 +118,88 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         return usuario.get();
     }
 
+    @Override
+    public Usuario obtenerCupon(int codigoCupon) throws Exception {
+
+        Optional<Cupon> cupon = cuponRepo.findById(codigoCupon);
+
+        if (cupon.isEmpty()){
+            throw new Exception("El código "+codigoCupon+" no está asociado a ningún cupon");
+        }
+
+        return cupon.get().getUsuarioCupon();
+    }
+
+    @Override
+    public Usuario obtenerCompra(int codigoCompra) throws Exception {
+        Optional<Compra> compra= compraRepo.findById(codigoCompra);
+
+        if (compra.isEmpty()){
+            throw new Exception("El código "+codigoCompra+" no está asociado a ningún compra");
+        }
+        return compra.get().getUsuarioCompra();
+    }
+
+
+    @Override
+    public Usuario obtenerComentario(int codigoComentario) throws Exception {
+        Optional<Comentario> comentario = comentarioRepo.findById(codigoComentario);
+
+        if (comentario.isEmpty()){
+            throw new Exception("El código "+codigoComentario+" no está asociado a ningún comentario");
+        }
+
+        return comentario.get().getUsuarioComentario();
+    }
+
+    @Override
+    public List<Categoria> obtenerListadoCategoria(int codigoCompra) throws Exception {
+        return null;
+    }
+
+    @Override
+    public UsuarioGetDTO obtenerUsuarioInt(int codigoUsuario) throws Exception {
+        return convertir( obtener(codigoUsuario) );
+    }
+
+    @Override
+    public List<Usuario> listarUsuarios() {
+        return usuarioRepo.findAll();
+    }
+
+    public List<UsuarioGetDTO> listarClientes(){
+        return convertirListaUsuariosGetDTO( usuarioRepo.findAll() );
+    }
+
+    private List<UsuarioGetDTO> convertirListaUsuariosGetDTO(List<Usuario> lista) {
+
+        List<UsuarioGetDTO> respuesta = new ArrayList<>();
+        for(Usuario u : lista){
+            respuesta.add( convertir(u) );
+        }
+        return respuesta;
+    }
+
+    private UsuarioDTO convertirDTO(Usuario usuario){
+
+        UsuarioDTO usuarioDTO = new UsuarioDTO(
+                usuario.getNombre(),
+                usuario.getEmail(),
+                usuario.getPassword(),
+                usuario.getDireccion(),
+                usuario.getTelefono()
+        );
+
+        return usuarioDTO;
+    }
+
+
+
+    /**
+     *
+     * @param codigoUsuario
+     * @throws Exception
+     */
     private void validarExiste(int codigoUsuario) throws Exception{
         boolean existe = usuarioRepo.existsById(codigoUsuario);
 
@@ -78,7 +209,13 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
     }
 
-    private UsuarioGetDTO convertir(Usuario usuario){
+    /**
+     *
+     * @param usuario
+     * @return
+     */
+    @Override
+    public UsuarioGetDTO convertir(Usuario usuario){
 
         UsuarioGetDTO usuarioDTO = new UsuarioGetDTO(
                 usuario.getCodigo(),
@@ -90,14 +227,20 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         return usuarioDTO;
     }
 
+    /**
+     *
+     * @param usuarioDTO
+     * @return
+     */
     private Usuario convertir(UsuarioDTO usuarioDTO){
 
-        Usuario usuario = new Usuario();
+        Usuario usuario = new Usuario( );
         usuario.setNombre( usuarioDTO.getNombre() );
         usuario.setEmail( usuarioDTO.getEmail() );
-        usuario.setDireccion( usuarioDTO.getDireccion() );
+        usuario.setPassword(passwordEncoder.encode(usuarioDTO.getPassword())   );
         usuario.setTelefono( usuarioDTO.getTelefono() );
-        usuario.setPassword( usuarioDTO.getPassword() );
+        usuario.setDireccion( usuarioDTO.getDireccion() );
+
 
         return usuario;
     }
