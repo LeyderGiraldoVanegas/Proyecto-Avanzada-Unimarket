@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import java.util.List;
+
+import javax.swing.*;
 
 @MappedSuperclass
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
@@ -22,4 +25,5 @@ public class Persona {
 
     @Column(nullable = false)
     private String password;
+
 }

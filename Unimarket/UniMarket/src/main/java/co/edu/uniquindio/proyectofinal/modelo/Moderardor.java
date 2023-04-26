@@ -4,14 +4,15 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+//@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Moderardor extends Persona implements Serializable {
 
-    @Id
-    @EqualsAndHashCode.Include
-    private String cedula;
+    @OneToMany(mappedBy = "moderardor")
+    private List<Producto> productoList;
 }

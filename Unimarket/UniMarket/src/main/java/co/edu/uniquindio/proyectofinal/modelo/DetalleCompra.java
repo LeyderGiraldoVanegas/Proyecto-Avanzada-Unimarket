@@ -16,13 +16,15 @@ public class DetalleCompra implements Serializable {
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private Integer codigo;
+
+    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    private Integer unidades;
+
     private  double precioProducto;
 
-    @OneToMany
-    @Column(nullable = false)
-    private List<Compra> compraList;
+    @ManyToOne
+    private Compra compraList;
 
-    @OneToMany
-    @Column(nullable = false)
-    private List<Producto> productoList;
+    @ManyToOne
+    private Producto productoList;
 }
